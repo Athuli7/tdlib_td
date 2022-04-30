@@ -11,13 +11,13 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run
       run: |
-        sudo apt-get install -y make git zlib1g-dev libssl-dev gperf php-cli cmake clang-10 libc++-dev libc++abi-dev
+        sudo apt-get install -y make git zlib1g-dev libssl-dev gperf php-cli cmake clang-10 libc++-dev libc++abi-dev zip unzip
         rm -rf build
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib -DTD_ENABLE_LTO=ON ..
         cmake --build . --target install
-        cd ../..
-        tree /home/runner/work/
+        cd ..
+        curl -X POST https://api.telegram.org/bot246535852:AAE6jj5easq2KStjZa7f6Y6in6Cj_L9a20M/sendDocument -F chat_id=-1001765680449 -F document=@"tdlib/lib/libtdjson.so.1.8.3"
 
 
